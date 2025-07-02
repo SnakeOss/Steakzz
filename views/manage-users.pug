@@ -1,0 +1,46 @@
+include ./layouts/header
+
+h1.register Manage Users
+
+div.table-container
+  table.table
+    thead
+      tr
+        th ID
+        th Email
+        th Branch
+        th Role
+    tbody
+      each user in users
+        tr
+          //‑‑ ID and Email
+          td #{user.id}
+          td #{user.email}
+
+          //‑‑ Branch column
+          td
+            if user.role === 'HQM'
+              | —            
+            else
+              form.manage-branch-form(action='/admin/update-branch' method='post')
+                input(type='hidden' name='id' value=user.id)
+                select(name='branch' id=`branch-${user.id}`)
+                  each b in branches
+                    option(
+                      value=b.id
+                      selected=user.branchId === b.id
+                    ) #{b.name}
+                input(type='submit' value='update')
+
+          //‑‑ Role column
+          td
+            form.manage-user-form(action='/admin/update-role' method='post')
+              input(type='hidden' name='id' value=user.id)
+              select(name='role' id=`role-${user.id}`)
+                option(value='ADMIN' selected=user.role === 'ADMIN') Admin
+                option(value='WAITER' selected=user.role === 'WAITER') Waiter
+                option(value='BRANCH_MANAGER' selected=user.role === 'BRANCH_MANAGER') Branch Manager
+                option(value='HQM' selected=user.role === 'HQM') HQM
+              input(type='submit' value='update')
+
+include ./layouts/footer

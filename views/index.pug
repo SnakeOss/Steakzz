@@ -1,0 +1,21 @@
+include ./layouts/header.pug
+h1.title Welcome to Steakz
+h2.title Our Menu
+
+div.menu-wrapper
+  ul.menu
+    each item in menuItems
+      li.menu-item
+        div.menu-item-container
+          div.menu-image-container
+            img(
+              src=`/images/${item.item.toLowerCase().replace(/_/g, '-').toLowerCase()}.jpg`, 
+              alt=item.item.replace(/_/g, ' '), 
+              onerror="this.src='/images/placeholder.jpg'"
+            )
+          div.menu-item-text
+            h2.menu-name= item.item.replace(/_/g, ' ') 
+            p.menu-description 
+            p.menu-price Price: $#{item.price.toFixed(2)}
+
+include ./layouts/footer.pug

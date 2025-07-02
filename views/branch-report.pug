@@ -1,0 +1,29 @@
+include ./layouts/header
+
+block content
+  h1.register Branch Manager Report
+
+  table.tablereport
+    thead
+      tr
+        th Order ID
+        th Order Date
+        th Menu Item
+        th Menu Item ID
+        th Waiter
+        th Branch
+    tbody
+      each order in orders
+        tr
+          td #{order.id}
+          td #{new Date(order.orderDate).toLocaleString()}
+          td #{order.menuItem.item}
+          td #{order.menuItem.id}
+          td #{order.user.email}
+          td #{order.branch.name}
+
+  // Display Total Earnings below the table
+  p.total-earnings
+    strong Total earnings: $#{totalEarnings}
+
+include ./layouts/footer

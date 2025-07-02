@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 Add New Branch
+  form(action='/api/branches' method='POST')
+    label(for='name') Branch Name:
+    input(type='text' name='name' id='name' required)
+    button(type='submit') Add Branch

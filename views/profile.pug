@@ -1,0 +1,33 @@
+include ./layouts/header
+
+h1.register Profile
+
+if person
+  .profile
+    table.profile-table
+      thead
+        tr
+          th.attribute Attribute
+          th Value
+      tbody
+        tr
+          td.attribute User ID
+          td #{person.id}
+        tr
+          td.attribute Email
+          td #{person.email}
+        tr
+          td.attribute Role
+          td #{person.role}
+        //- Only show Branch if role is not HQM
+        if person.role !== 'HQM'
+          tr
+            td.attribute Branch
+            td #{person.branchId}
+else
+  .profile
+    div.error
+      p.title Error
+      p.subtitle User data not available.
+
+include ./layouts/footer
